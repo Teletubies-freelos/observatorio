@@ -16,6 +16,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    sx:{
+      background: 'none',
+      width: '80vw'
+    },
     data:[
       {
         name: 'sadsadsa',
