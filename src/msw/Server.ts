@@ -15,7 +15,7 @@ export class MSWServer{
     if(!MSWServer.instance){
       MSWServer.instance = new MSWServer();
       MSWServer.instance.server.listen({
-        onUnhandledRequest: 'error'
+        onUnhandledRequest: 'warn'
       });
     }
 

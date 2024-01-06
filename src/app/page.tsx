@@ -1,11 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-if(process.env.IS_MSW_ON && process.env.NODE_ENV === 'development' && typeof window === 'undefined'){
-  import('../msw/Server').then(({MSWServer}) =>{
-    MSWServer.init();
-  }) 
-}
 
 export default async function Home() {
   const a  = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
