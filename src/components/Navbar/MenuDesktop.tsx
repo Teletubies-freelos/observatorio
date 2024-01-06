@@ -25,7 +25,7 @@ export function MenuDesktop({ name, childrenItems, href }: Readonly<MenuDesktopP
   return(
     <>
       <Button 
-        endIcon={anchorMenu ?<ExpandMore /> : <ExpandLess />}
+        endIcon={!anchorMenu ? <ExpandMore /> : <ExpandLess />}
         onClick={_handleOpen} >
         {name}
       </Button>

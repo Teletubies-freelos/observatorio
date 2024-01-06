@@ -7,6 +7,7 @@ import { ThemeTogglerProvider } from '@/providers/ThemeTogglerP';
 import { NavBar } from '@/components/Navbar';
 
 import './reset.css'
+import { NavbarContainer } from '@/containers/Navbar/NavbarContainer';
 
 if(process.env.IS_MSW_ON && process.env.NODE_ENV === 'development' && typeof window === 'undefined'){
   import('../msw/Server').then(({MSWServer}) =>{
@@ -31,26 +32,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeTogglerProvider>
-            <NavBar  sx={{
-      background: 'none',
-      width: '100%',
-      paddingInline: 2
-    }}
-    data={[
-      {
-        name: 'sadsadsa',
-        href: '#'        
-      },
-      {
-        name: 'sadsadsa',
-        childrenItems: [
-          {
-            name: 'asdsadsa',
-            href: '#'
-          }
-        ]
-      }
-    ]}/>
+            <NavbarContainer />
             {children}
           </ThemeTogglerProvider>
         </AppRouterCacheProvider>
