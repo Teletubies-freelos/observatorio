@@ -18,7 +18,8 @@ export const Default: Story = {
   args: {
     sx:{
       background: 'none',
-      width: '80vw'
+      width: '80vw',
+      paddingInline: 2
     },
     data:[
       {
@@ -27,7 +28,7 @@ export const Default: Story = {
       },
       {
         name: 'sadsadsa',
-        children: [
+        childrenItems: [
           {
             name: 'asdsadsa',
             href: '#'

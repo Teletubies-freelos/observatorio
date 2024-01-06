@@ -1,17 +1,15 @@
+'use client';
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { Accordion, AccordionDetails, AccordionSummary, AppBar, AppBarProps, Box, IconButton, List, ListItem, Menu, MenuItem, Stack, Toolbar } from "@mui/material";
 import { Menu as MenuIcon, ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import { CmpjLogo } from "../Logo";
 import { SwitchColorMode } from "../SwitchColorMode/SwitchColorMode";
+import { NavItem } from "./types";
+import { MenuDesktop } from "./MenuDesktop";
 
-interface NavItem{
-  name: string;
-  href?: string;
-  children?: NavItem[]
-}
 
-interface NavBarProps extends AppBarProps{
+export interface NavBarProps extends AppBarProps{
   data: NavItem[]
 }
 
@@ -44,10 +42,10 @@ export function NavBar({data, ...props}:Readonly<NavBarProps>){
           }}
         >
           {/* TODO: separate responsability */}
-          {data.map(({name, href, children})=><MenuItem 
+          {data.map(({name, href, childrenItems})=><MenuItem 
             key={name} 
             // @ts-ignore
-            component={children? Accordion : Link}
+            component={childrenItems? Accordion : Link}
             href={href}
             sx={{
               display: 'flex',
@@ -55,7 +53,7 @@ export function NavBar({data, ...props}:Readonly<NavBarProps>){
             }}
           >
             {
-              children  ? <AccordionSummary
+              childrenItems  ? <AccordionSummary
                 sx={{
                   margin: 0
                 }}
@@ -67,10 +65,10 @@ export function NavBar({data, ...props}:Readonly<NavBarProps>){
               </AccordionSummary>:name
             }
             {
-              children && <AccordionDetails>
+              childrenItems && <AccordionDetails>
                 <List>
                   {
-                    children.map(({name, href})=>
+                    childrenItems.map(({name, href})=>
                       <ListItem 
                         key={name}
                         // @ts-ignore
@@ -86,10 +84,13 @@ export function NavBar({data, ...props}:Readonly<NavBarProps>){
             }
           </MenuItem>)}
         </Menu>
-        <Stack direction={'row'} sx={{
+        <Stack spacing={2} direction={'row'} sx={{
           display: {xs: 'none', md: 'flex'}
         }}>
-          Aca va el menu que Luiggy va hacer para desktop
+          {data.map((itemData)=>(itemData.childrenItems? 
+            <MenuDesktop key={itemData.name} {...itemData}/>: 
+            <Link key={itemData.name} href={itemData.href ?? ''}>{itemData.name}</Link>))
+          }
         </Stack>
         <SwitchColorMode />
         <IconButton

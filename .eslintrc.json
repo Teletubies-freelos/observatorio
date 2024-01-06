@@ -5,7 +5,6 @@
   ],
   "rules": {
     "no-console": "error",
-    "no-confusing-arrow": "error",
     "complexity": "error"
   }
 }
