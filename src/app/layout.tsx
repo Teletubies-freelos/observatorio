@@ -1,6 +1,21 @@
 import type { Metadata } from 'next'
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
+
 import { Inter } from 'next/font/google'
-import './globals.css'
+
+import { ThemeTogglerProvider } from '@/providers/ThemeTogglerP';
+import { NavbarContainer } from '@/containers/Navbar/NavbarContainer';
+
+import './reset.css'
+
+//#region msw
+import { MSWServer } from '../msw/Server'
+
+if(process.env.IS_MSW_ON && process.env.NODE_ENV === 'development' && typeof window === 'undefined'){
+  MSWServer.init();
+}
+//#endregion
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,12 +26,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AppRouterCacheProvider>
+          <ThemeTogglerProvider>
+            <NavbarContainer />
+            {children}
+          </ThemeTogglerProvider>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   )
 }
