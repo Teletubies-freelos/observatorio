@@ -9,13 +9,11 @@ import { NavbarContainer } from '@/containers/Navbar/NavbarContainer';
 import './reset.css'
 
 //#region msw
-//keep this region commented for production
-// TODO: Instead of commenting code, before building, remove this region programmatically
-/* import { MSWServer } from '../msw/Server'
+import { MSWServer } from '../msw/Server'
 
 if(process.env.IS_MSW_ON && process.env.NODE_ENV === 'development' && typeof window === 'undefined'){
   MSWServer.init();
-} */
+}
 //#endregion
 
 
